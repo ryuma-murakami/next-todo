@@ -14,3 +14,7 @@ export type TaskItemProps = {
   task: Task;
   onChange: (id: string, update: Partial<Task>) => void;
 };
+
+export type CreateTaskFormProps = {
+  onSubmit: (title: string) => void;
+};

@@ -18,3 +18,9 @@ export type TaskItemProps = {
 export type CreateTaskFormProps = {
   onSubmit: (title: string) => void;
 };
+
+export type TrashedTaskItemProps = {
+  task: Task;
+  onRestore: (id: string, update: Partial<Task>) => void;
+  onDelete: (id: string) => void;
+};

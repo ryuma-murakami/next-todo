@@ -13,7 +13,7 @@ datasource db {
 model tasks {
   id        String    @id @default(cuid())
   title     String
-  status    String
+  status    String    @default("notStarted")
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
 }

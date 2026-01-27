@@ -12,15 +12,8 @@ export type LayoutProps = {
 
 export type TaskItemProps = {
   task: Task;
-  onChange: (id: string, update: Partial<Task>) => void;
-};
-
-export type CreateTaskFormProps = {
-  onSubmit: (title: string) => void;
 };
 
 export type TrashedTaskItemProps = {
   task: Task;
-  onRestore: (id: string, update: Partial<Task>) => void;
-  onDelete: (id: string) => void;
 };

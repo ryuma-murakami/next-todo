@@ -1,32 +1,15 @@
 'use client';
 
-import type { CreateTaskFormProps } from '@/lib/type';
+import { addTask } from '@/app/actions';
 import { Plus } from 'lucide-react';
-import { FormEvent, useRef } from 'react';
 
-export function CreateTaskForm({ onSubmit }: CreateTaskFormProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!inputRef.current) {
-      return;
-    }
-
-    const inputValue = inputRef.current.value.trim();
-    if (!inputValue) {
-      return;
-    }
-
-    onSubmit(inputValue);
-    inputRef.current.value = '';
-  };
-
+export function CreateTaskForm() {
   return (
-    <form className="flex gap-0.5" onSubmit={handleSubmit}>
+    <form className="flex gap-0.5" action={addTask}>
       <input
-        ref={inputRef}
         type="text"
+        id="title"
+        name="title"
         placeholder="新しいタスクを入力してください"
         className="grow rounded border border-gray-300 p-2 bg-white"
       />

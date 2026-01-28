@@ -13,15 +13,15 @@ export function TaskItem({ task }: TaskItemProps) {
         <input
           type="checkbox"
           className="size-5 cursor-pointer"
-          checked={task.status === 'completed'}
+          defaultChecked={task.status === 'completed'}
           onChange={event => event.currentTarget.form?.requestSubmit()}
         />
       </form>
-      <form action={editTask}>
+      <form action={editTask} className="flex-1">
         <input type="hidden" id="id" name="id" value={task.id} />
         <input
           type="text"
-          className="flex-1 border px-2 py-1 border-gray-300 bg-white disabled:text-gray-400 disabled:line-through disabled:cursor-not-allowed"
+          className="w-full border px-2 py-1 border-gray-300 bg-white disabled:text-gray-400 disabled:line-through disabled:cursor-not-allowed"
           defaultValue={task.title}
           disabled={task.status === 'completed'}
           onKeyDown={event => {

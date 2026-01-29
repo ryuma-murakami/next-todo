@@ -1,3 +1,4 @@
+import type { Status } from '@prisma/client';
 import prisma from './prisma';
 import type { Task } from './type';
 
@@ -9,7 +10,7 @@ export function createTask(title: string): Promise<Task> {
 
 export function updateTask(
   id: string,
-  update: { title?: string; status?: string },
+  update: { title?: string; status?: Status },
 ) {
   return prisma.tasks.update({
     where: { id },

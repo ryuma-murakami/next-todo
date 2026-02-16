@@ -1,4 +1,4 @@
-import type { Status } from '@prisma/client';
+import { Status } from '@prisma/client';
 import prisma from './prisma';
 import type { Task } from './type';
 
@@ -27,7 +27,7 @@ export function deleteTaskById(id: string): Promise<Task> {
 export function deleteAllTrashedTasks(): Promise<{ count: number }> {
   return prisma.tasks.deleteMany({
     where: {
-      status: 'trashed',
+      status: Status.trashed,
     },
   });
 }

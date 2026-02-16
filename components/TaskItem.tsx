@@ -2,6 +2,7 @@
 
 import { editTask, toggleTaskStatus, trashTask } from '@/app/actions';
 import type { TaskItemProps } from '@/lib/type';
+import { Status } from '@prisma/client';
 import { Trash2 } from 'lucide-react';
 
 export function TaskItem({ task }: TaskItemProps) {
@@ -13,7 +14,7 @@ export function TaskItem({ task }: TaskItemProps) {
         <input
           type="checkbox"
           className="size-5 cursor-pointer"
-          defaultChecked={task.status === 'completed'}
+          defaultChecked={task.status === Status.completed}
           onChange={event => event.currentTarget.form?.requestSubmit()}
         />
       </form>
@@ -23,7 +24,7 @@ export function TaskItem({ task }: TaskItemProps) {
           type="text"
           className="w-full border px-2 py-1 border-gray-300 bg-white disabled:text-gray-400 disabled:line-through disabled:cursor-not-allowed"
           defaultValue={task.title}
-          disabled={task.status === 'completed'}
+          disabled={task.status === Status.completed}
           onKeyDown={event => {
             if (event.nativeEvent.isComposing || event.key !== 'Enter') {
               return;

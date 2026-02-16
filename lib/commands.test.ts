@@ -61,7 +61,7 @@ describe('commands', () => {
 
     expect(prisma.tasks.deleteMany).toHaveBeenCalledWith({
       where: {
-        status: 'trashed',
+        status: Status.trashed,
       },
     });
   });

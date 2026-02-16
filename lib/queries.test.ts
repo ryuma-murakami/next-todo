@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { getActiveTasks, getTrashedTasks } from './queries';
 import prisma from './prisma';
+import { Status } from '@prisma/client';
 
 vi.mock('./prisma', () => ({
   default: {
@@ -21,7 +22,7 @@ describe('queries', () => {
     expect(prisma.tasks.findMany).toHaveBeenCalledWith({
       where: {
         status: {
-          not: 'trashed',
+          not: Status.trashed,
         },
       },
       orderBy: {
@@ -35,7 +36,7 @@ describe('queries', () => {
 
     expect(prisma.tasks.findMany).toHaveBeenCalledWith({
       where: {
-        status: 'trashed',
+        status: Status.trashed,
       },
       orderBy: {
         createdAt: 'desc',

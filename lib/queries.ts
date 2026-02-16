@@ -1,3 +1,4 @@
+import { Status } from '@prisma/client';
 import prisma from './prisma';
 import type { Task } from './type';
 
@@ -5,7 +6,7 @@ export function getActiveTasks(): Promise<Task[]> {
   return prisma.tasks.findMany({
     where: {
       status: {
-        not: 'trashed',
+        not: Status.trashed,
       },
     },
     orderBy: {
@@ -17,7 +18,7 @@ export function getActiveTasks(): Promise<Task[]> {
 export function getTrashedTasks(): Promise<Task[]> {
   return prisma.tasks.findMany({
     where: {
-      status: 'trashed',
+      status: Status.trashed,
     },
     orderBy: {
       createdAt: 'desc',

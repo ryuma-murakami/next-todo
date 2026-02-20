@@ -5,8 +5,9 @@ import { CreateTaskForm } from './CreateTaskForm';
 it('CreateTaskForm', () => {
   render(<CreateTaskForm />);
 
-  const placeholderText =
-    screen.getByPlaceholderText('新しいタスクを入力してください');
+  const input = screen.getByPlaceholderText('新しいタスクを入力してください');
+  expect(input).toBeInTheDocument();
 
-  expect(placeholderText).toBeInTheDocument();
+  const button = screen.getByRole('button');
+  expect(button).toBeInTheDocument();
 });

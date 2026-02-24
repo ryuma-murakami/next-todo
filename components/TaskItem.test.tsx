@@ -1,8 +1,9 @@
 import { cleanup, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TaskItem } from './TaskItem';
 import type { Task } from '@/lib/type';
 import { Status } from '@prisma/client';
+import userEvent from '@testing-library/user-event';
 
 describe('TaskItem', () => {
   const task: Task = {
@@ -48,5 +49,17 @@ describe('TaskItem', () => {
       name: `タスク「${task.title}」をゴミ箱へ移動する`,
     });
     expect(button).toBeInTheDocument();
+  });
+
+  it('submits when checkbox is changed', async () => {
+    const event = userEvent.setup();
+    render(<TaskItem task={task} />);
+
+    const checkbox = screen.getByRole('checkbox');
+    const form = checkbox.closest('form')!;
+    const submitSpy = vi.spyOn(form, 'requestSubmit');
+
+    await event.click(checkbox);
+    expect(submitSpy).toHaveBeenCalled();
   });
 });

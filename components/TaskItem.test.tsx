@@ -26,8 +26,8 @@ describe('TaskItem', () => {
   it('renders the task title', () => {
     render(<TaskItem task={task} />);
 
-    const title = screen.getByDisplayValue(task.title);
-    expect(title).toBeInTheDocument();
+    const text = screen.getByDisplayValue(task.title);
+    expect(text).toBeInTheDocument();
   });
 
   it('disables the title input when the task is completed', () => {
@@ -38,8 +38,8 @@ describe('TaskItem', () => {
 
     render(<TaskItem task={completedTask} />);
 
-    const title = screen.getByDisplayValue(task.title);
-    expect(title).toBeDisabled();
+    const text = screen.getByDisplayValue(task.title);
+    expect(text).toBeDisabled();
   });
 
   it('renders the delete button with the correct aria-label', () => {
@@ -51,7 +51,7 @@ describe('TaskItem', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('submits when checkbox is changed', async () => {
+  it('submits the form when the checkbox is toggled', async () => {
     const event = userEvent.setup();
     render(<TaskItem task={task} />);
 
@@ -60,6 +60,18 @@ describe('TaskItem', () => {
     const submitSpy = vi.spyOn(form, 'requestSubmit');
 
     await event.click(checkbox);
-    expect(submitSpy).toHaveBeenCalled();
+    expect(submitSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('submits the form when Enter is pressed in the title input', async () => {
+    const event = userEvent.setup();
+    render(<TaskItem task={task} />);
+
+    const text = screen.getByDisplayValue(task.title);
+    const form = text.closest('form')!;
+    const submitSpy = vi.spyOn(form, 'requestSubmit');
+
+    await event.type(text, 'Edited Task{enter}');
+    expect(submitSpy).toHaveBeenCalledTimes(1);
   });
 });

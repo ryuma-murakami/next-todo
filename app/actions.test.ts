@@ -47,6 +47,14 @@ describe('addTask', () => {
     expect(createTask).toHaveBeenCalledWith('Test Task');
     expect(revalidatePath).toHaveBeenCalledWith('/');
   });
+
+  it('does nothing when title is empty', async () => {
+    const formData = createFormData({ title: ' ' });
+    await addTask(formData);
+
+    expect(createTask).not.toHaveBeenCalled();
+    expect(revalidatePath).not.toHaveBeenCalled();
+  });
 });
 
 describe('toggleTaskStatus', () => {
@@ -55,6 +63,14 @@ describe('toggleTaskStatus', () => {
     await toggleTaskStatus(formData);
 
     expect(updateTask).toHaveBeenCalledWith('1', { status: Status.completed });
+    expect(revalidatePath).toHaveBeenCalledWith('/');
+  });
+
+  it('toggles status from completed to notStarted', async () => {
+    const formData = createFormData({ id: '1', status: Status.completed });
+    await toggleTaskStatus(formData);
+
+    expect(updateTask).toHaveBeenCalledWith('1', { status: Status.notStarted });
     expect(revalidatePath).toHaveBeenCalledWith('/');
   });
 });
@@ -66,6 +82,14 @@ describe('editTask', () => {
 
     expect(updateTask).toHaveBeenCalledWith('1', { title: 'Updated Task' });
     expect(revalidatePath).toHaveBeenCalledWith('/');
+  });
+
+  it('does nothing when title is empty', async () => {
+    const formData = createFormData({ id: '1', title: ' ' });
+    await editTask(formData);
+
+    expect(updateTask).not.toHaveBeenCalled();
+    expect(revalidatePath).not.toHaveBeenCalled();
   });
 });
 

@@ -6,6 +6,7 @@ import {
   deleteTaskById,
   updateTask,
 } from '@/lib/commands';
+import { Status } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
 export async function addTask(formData: FormData) {
@@ -21,7 +22,7 @@ export async function addTask(formData: FormData) {
 export async function toggleTaskStatus(formData: FormData) {
   const status = formData.get('status') as string;
   await updateTask(formData.get('id') as string, {
-    status: status === 'notStarted' ? 'completed' : 'notStarted',
+    status: status === Status.notStarted ? Status.completed : Status.notStarted,
   });
 
   revalidatePath('/');
@@ -41,14 +42,14 @@ export async function editTask(formData: FormData) {
 
 export async function trashTask(formData: FormData) {
   await updateTask(formData.get('id') as string, {
-    status: 'trashed',
+    status: Status.trashed,
   });
 
   revalidatePath('/');
 }
 
 export async function restoreTaskById(formData: FormData) {
-  await updateTask(formData.get('id') as string, { status: 'notStarted' });
+  await updateTask(formData.get('id') as string, { status: Status.notStarted });
 
   revalidatePath('/trash');
 }

@@ -22,7 +22,7 @@ export function TaskItem({ task }: TaskItemProps) {
         <input type="hidden" id="id" name="id" value={task.id} />
         <input
           type="text"
-          className="w-full border px-2 py-1 border-gray-300 bg-white disabled:text-gray-400 disabled:line-through disabled:cursor-not-allowed"
+          className="w-full border border-gray-300 bg-white px-2 py-1 disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through"
           defaultValue={task.title}
           disabled={task.status === Status.completed}
           onKeyDown={event => {

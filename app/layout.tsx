@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps) {
             <ul className="flex flex-col gap-2">
               <li>
                 <Link
-                  className="flex items-center gap-2 rounded px-5 py-3 bg-blue-400 text-white hover:bg-slate-100"
+                  className="flex items-center gap-2 rounded bg-blue-400 px-5 py-3 text-white hover:bg-slate-100"
                   href="/"
                 >
                   <BookCheck />
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps) {
               </li>
               <li>
                 <Link
-                  className="flex items-center gap-2 rounded px-5 py-3 bg-blue-400 text-white hover:bg-slate-100"
+                  className="flex items-center gap-2 rounded bg-blue-400 px-5 py-3 text-white hover:bg-slate-100"
                   href="/trash"
                 >
                   <Trash2 />

@@ -11,7 +11,7 @@ export function CreateTaskForm() {
         id="title"
         name="title"
         placeholder="新しいタスクを入力してください"
-        className="grow rounded border border-gray-300 p-2 bg-white"
+        className="grow rounded border border-gray-300 bg-white p-2"
       />
       <button
         type="submit"
